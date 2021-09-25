@@ -30,5 +30,4 @@ public class RecSystemService {
         return data.get(0).toString();
     }
 
-
 }
