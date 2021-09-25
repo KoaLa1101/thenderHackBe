@@ -1,4 +1,4 @@
-package ru.itlab.thenderhackbe.models;
+package ru.itlab.tenderhackbe.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

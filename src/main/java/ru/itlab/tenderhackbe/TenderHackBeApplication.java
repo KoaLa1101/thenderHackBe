@@ -1,13 +1,13 @@
-package ru.itlab.thenderhackbe;
+package ru.itlab.tenderhackbe;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ThenderHackBeApplication {
+public class TenderHackBeApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(ThenderHackBeApplication.class, args);
+        SpringApplication.run(TenderHackBeApplication.class, args);
     }
 
 }
