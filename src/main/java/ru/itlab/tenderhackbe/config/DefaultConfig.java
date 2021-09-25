@@ -45,7 +45,7 @@ public class DefaultConfig {
         // создали фабрику EntityManager как Spring-бин
         LocalContainerEntityManagerFactoryBean entityManagerFactory = new LocalContainerEntityManagerFactoryBean();
         entityManagerFactory.setDataSource(dataSource());
-        entityManagerFactory.setPackagesToScan("ru.website.selenium.model");
+        entityManagerFactory.setPackagesToScan("ru.itlab.tenderhackbe.models");
         entityManagerFactory.setJpaVendorAdapter(hibernateJpaVendorAdapter);
         entityManagerFactory.setJpaProperties(additionalProperties());
         return entityManagerFactory;
