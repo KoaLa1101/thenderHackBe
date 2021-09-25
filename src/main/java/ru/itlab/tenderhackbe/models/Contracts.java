@@ -6,41 +6,41 @@ import javax.persistence.*;
 
 @Data
 @Entity
-@Table(name = "Контракты")
+@Table(name = "contracts")
 public class Contracts {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "Номер контракта")
+    @Column(name = "contracts_number")
     private String contractsNumber;
 
-    @Column(name = "Дата Публикации КС на ПП")
+    @Column(name = "publication_date")
     private String publicationDate;
 
-    @Column(name = "Дата заключения контракта")
+    @Column(name = "transaction_date")
     private String transactionDate;
 
-    @Column(name = "Цена контракта")
+    @Column(name = "price")
     private String price;
     //ИНН заказчика
     private Long customerINN;
     //КПП заказчика
     private Long customerKPP;
 
-    @Column(name = "Наименование Заказчика")
+    @Column(name = "customer_name")
     private String customerName;
 
     //ИНН поставщика
-    @Column(name = "ИНН поставщика")
+    @Column(name = "seller_inn")
     private Long sellerINN;
     //КПП поставщика
-    @Column(name = "КПП поставщика")
+    @Column(name = "seller_kpp")
     private Long sellerKPP;
 
-    @Column(name = "Наименование поставщика")
+    @Column(name = "seller_name")
     private String sellerName;
 
-    @Column(name = "СТЕ")
+    @Column(name = "cte")
     private String STE;
 
 }
