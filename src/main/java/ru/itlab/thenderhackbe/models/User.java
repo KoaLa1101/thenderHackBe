@@ -17,5 +17,8 @@ import javax.persistence.Table;
 @Table(name = "usr")
 public class User {
     @Id
+    // its mean inn
     private String id;
+    private String phoneNumber;
+    private String email;
 }
