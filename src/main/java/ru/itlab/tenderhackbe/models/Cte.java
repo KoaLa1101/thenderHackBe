@@ -2,13 +2,11 @@ package ru.itlab.tenderhackbe.models;
 
 import lombok.Data;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Data
 @Entity
+@Table(name = "cte")
 public class Cte {
     private Long cteId;
     private String cteName;
