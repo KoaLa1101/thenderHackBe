@@ -1,4 +1,4 @@
-package ru.itlab.thenderhackbe.services;
+package ru.itlab.tenderhackbe.services;
 
 import org.springframework.stereotype.Service;
 

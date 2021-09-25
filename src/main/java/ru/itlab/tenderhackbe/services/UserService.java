@@ -1,8 +1,8 @@
-package ru.itlab.thenderhackbe.services;
+package ru.itlab.tenderhackbe.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.itlab.thenderhackbe.repositories.UserRepository;
+import ru.itlab.tenderhackbe.repositories.UserRepository;
 
 @Service
 public class UserService {
