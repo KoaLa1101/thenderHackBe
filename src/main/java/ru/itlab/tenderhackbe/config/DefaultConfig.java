@@ -1,4 +1,4 @@
-package ru.itlab.thenderhackbe.config;
+package ru.itlab.tenderhackbe.config;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
