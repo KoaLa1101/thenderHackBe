@@ -16,11 +16,11 @@ public class CteServiceImpl {
     @Autowired
     private CteRepository cteRepository;
 
-    public Map<String, List<Long>> getCteId(List<String> codes){
-        Map<String, List<Long>> result = new HashMap<>();
-        for (String code:codes){
-            result.put(code, cteRepository.getAllByKpgzCode(code));
-        }
-        return result;
-    }
+//    public Map<String, List<Long>> getCteId(List<String> codes){
+//        Map<String, List<>> result = new HashMap<>();
+//        for (String code:codes){
+//            result.put(code, cteRepository.getAllByKpgzCode(code));
+//        }
+//        return result;
+//    }
 }

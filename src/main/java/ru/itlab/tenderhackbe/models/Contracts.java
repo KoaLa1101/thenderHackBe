@@ -1,16 +1,20 @@
 package ru.itlab.tenderhackbe.models;
 
+import com.vladmihalcea.hibernate.type.json.JsonStringType;
+import com.vladmihalcea.hibernate.type.json.JsonType;
 import lombok.Data;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
-
 @Data
 @Entity
 @Table(name = "contracts")
+@TypeDef(name = "json", typeClass = JsonType.class)
 public class Contracts {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long cteId;
+
     @Column(name = "contracts_number")
     private String contractsNumber;
 
@@ -40,7 +44,10 @@ public class Contracts {
     @Column(name = "seller_name")
     private String sellerName;
 
-    @Column(name = "cte")
-    private String STE;
+    @Type(type = "json")
+    @Column(columnDefinition = "json")
+    private Order cte;
+
+
 
 }
