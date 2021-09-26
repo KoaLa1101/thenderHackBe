@@ -13,7 +13,7 @@ import java.util.List;
 public interface ContractsRepository extends JpaRepository<Contracts,Long> {
 
 
-    @Query(nativeQuery = true,value = "select * from contracts where cte->> 'id' =:cteId ")
-    List<Contracts> findByCteId(@Param("cteId") Long cteId);
+    @Query(nativeQuery = true,value = "select contracts_number,publication_date,transaction_date,price,customer_inn,customer_kpp,customer_name,seller_inn,seller_kpp,contracts.seller_name,jso as cte from contracts,(select json_array_elements(cte) as jso from contracts) as jsn where row_to_json(jsn)->'jso'->>'Id'=:cteId")
+    List<Contracts> findByCteId(@Param("cteId") String cteId);
 
 }

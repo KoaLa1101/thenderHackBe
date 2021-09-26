@@ -23,15 +23,16 @@ public class ContractsServiceImpl {
     //каждому коду топ 3 популярных товара по сути отсортировать лист лонгов
     public Map<String,List<ResultDTO>> getMostPopularItemsMap(Map<String, List<CTETableDTO>> cteIDByKPGZCodeMap){
         //строка - код, лист - cteID
-        Map<String,List<ResultDTO>> resultDTOMap = new HashMap<>();  //здесь финальбные данные для фронта в dto-шке id, которое ты мне передаёшь, и общая сумма (максимальная)
+        Map<String,List<ResultDTO>> resultDTOMap = new HashMap<>();
 
         cteIDByKPGZCodeMap.forEach((gpkzCode, idCTEInCTETable) -> {
-            List<ResultDTO> resultDTOList = new ArrayList<>();// отфильтрованные товары (ID)? Отсюда взять топ 3 т е три первые можно это сделать на фронте, можно здесь
+            List<ResultDTO> resultDTOList = new ArrayList<>();
 
-            idCTEInCTETable.stream().forEach(CTETableDto -> { //для каждого id ищется его order(поле в json формате в таблице категории)
-                List<Contracts> contractsDtoList = contractsRepository.findByCteId(CTETableDto.getCteId()); //вытащили все такие ContractsDto  Todo изменить от выборки полного кнтракта на срез
+            idCTEInCTETable.stream().forEach(CTETableDto -> {
+                List<Contracts> contractsDtoList = contractsRepository.findByCteId(CTETableDto.getCteId().toString());
                 LongSummaryStatistics longSummaryStatistics = contractsDtoList
                         .stream()
+                        .filter(contracts ->Objects.nonNull(contracts) && Objects.nonNull(contracts.getCte()))
                         .map(contracts -> Math.round(contracts.getCte().getQuantity()))
                         .flatMapToLong(LongStream::of).summaryStatistics();  //Посчитали статистику (в ней есть сумма)
                 resultDTOList.add(ResultDTO.builder().CTEName(CTETableDto.getCteName()).summ(longSummaryStatistics.getSum()).id(CTETableDto.getCteId()).build());
