@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 @Builder
 public class CTETableDTO
 {
-    private Long cteId;
+    private String cteId;
     private String cteName;
 }

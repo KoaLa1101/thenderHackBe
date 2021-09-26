@@ -3,10 +3,12 @@ package ru.itlab.tenderhackbe.services;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.itlab.tenderhackbe.models.CTETableDTO;
 import ru.itlab.tenderhackbe.repositories.CteRepository;
 
 import java.io.*;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -19,10 +21,10 @@ public class CteServiceImpl {
     public Map<String, List<String>> getCteId(String inn) {
         List<String> codes = getCodes(inn);
         Map<String, List<String>> result = new HashMap<>();
+        List<CTETableDTO> cteTableDTOList = new ArrayList<>();
         for (String code : codes) {
-            log.info("Code:" + code);
-            result.put(code, cteRepository.getAllIdByKpgz(code));
-            log.info(result.size() + result.toString());
+            cteTableDTOList = cteRepository.getAllIdByKpgz(code);
+            result.put(code, cteTableDTOList.stream().map(x->x.getCteId()).collect(Collectors.toList()));
         }
         return result;
     }
