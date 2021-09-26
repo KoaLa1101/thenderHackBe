@@ -1,27 +1,56 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<title>Recomendations</title>
-	<link rel="stylesheet" type="text/css" href="index.css">
-	<link rel="stylesheet" href="flicky.css" media="screen">
+    <meta charset="utf-8">
+    <title>Recomendations</title>
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <link rel="stylesheet" href="flicky.css" media="screen">
 </head>
 <body>
+
+<input id="innField" type="number" placeholder="Введите ИНН заказчика">
+<button id="getRecBtn">Получить рекомендации</button>
+
 <h2>Рекомендации</h2>
 <div class="gallery js-flickity">
-  <div class="gallery-cell" id="gallery-primary">
-  </div>
-  <div class="gallery-cell" id='gallery-secondary'></div>
+    <div class="gallery-cell" id="gallery-primary">
+    </div>
+    <div class="gallery-cell" id='gallery-secondary'></div>
 </div>
 
 <div class="b-popup" id="popup1">
     <div class="b-popup-content">
-    <a href="javascript:popUpHide()">X</a>
+        <a href="javascript:popUpHide()">X</a>
     </div>
 </div>
 
 <script src="jquery.js"></script>
 <script src="flicky.js"></script>
 <script type="text/javascript" src="index.js"></script>
+<script>
+    $("#getRecBtn").click(function () {
+        $("#getRecBtn").prop('disabled', true);
+        $.ajax({
+            url: "localhost:8080/gg",
+            method: 'GET',
+            cache: false,
+            type: "text/json",
+
+            success: function (res) {
+                console.log(res);
+                let jsonData = JSON.parse(res);
+                for (let i = 0; i < jsonData.array.length; i++) {
+                    let elem = jsonData.array[i];
+                    addItem(elem);
+                    console.log(elem);
+                }
+                $("#getRecBtn").prop('disabled', false);
+            },
+            error: function (res) {
+                $("#getRecBtn").prop('disabled', false);
+            }
+        })
+    });
+</script>
 </body>
 </html>

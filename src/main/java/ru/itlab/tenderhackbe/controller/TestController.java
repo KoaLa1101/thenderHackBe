@@ -5,16 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.itlab.tenderhackbe.models.CTETableDTO;
 import ru.itlab.tenderhackbe.services.ContractsServiceImpl;
 import ru.itlab.tenderhackbe.services.CteServiceImpl;
-
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 @Slf4j
 @RestController
@@ -27,7 +19,7 @@ public class TestController {
     CteServiceImpl cteService;
 
     @GetMapping("/getTest")
-    public void getTest(){
+    public void getTest() {
   /*      Map<String, List<CTETableDTO>> testMap = new HashMap<>();
         testMap.put("01.20.07.11.03.01.02",
                 Arrays.asList(CTETableDTO.builder()
@@ -41,14 +33,16 @@ public class TestController {
                                 .build()));
       log.info(  contractsService.getMostPopularItemsMap(testMap).toString());*/
     }
+
     @GetMapping("/getInfo")
-    public void getTestInfo(){
-        log.info( cteService.getCteId("7709043455").toString());
+    public void getTestInfo() {
+        log.info(cteService.getCteId("7709043455").toString());
 
     }
 
     @RequestMapping("/gg")
-    public void getTesting(){
+    public String getTesting() {
         log.info(cteService.getCteId("7709043455").toString());
+        return "[{'id':12,'name'='bulat'}]";
     }
 }
