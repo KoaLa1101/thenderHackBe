@@ -1,0 +1,153 @@
+* {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+h2 {
+	margin-left: 30px;
+	margin-top: 30px;
+	font-family: "Open Sans", sans-serif;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 32px;
+	line-height: 44px;
+}
+
+/* Gallery */
+
+.gallery {
+	width: 1275px;
+}
+
+.gallery-cell {
+	display: flex;
+  width: 80%;
+  height: 315px;
+  margin-right: 10px;
+  counter-increment: gallery-cell;
+}
+
+/* Item */
+
+.item {
+	background: #FCFFFF;
+	display: flex;
+	margin-right: 30px;
+	flex-direction: column;
+	height: 95%;
+	width: 225px;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.item:hover .description {
+	display: none;
+}
+
+.item:hover .select {
+	display: flex;
+}
+
+.item img {
+	margin-top: 15px;
+	margin-bottom: 15px;
+	margin-left: 48px;
+	width: 130px;
+	height: 130px;
+}
+
+.item .price {
+	font-family: "Open Sans", sans-serif;
+	font-style: normal;
+	font-weight: 600;
+	font-size: 18px;
+	line-height: 25px;
+	margin-left: 15px;
+	margin-top: 0px;
+	margin-bottom: 5px;
+}
+
+.item .availability{
+	font-family: "Open Sans", sans-serif;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 14px;
+	line-height: 19px;
+	margin-left: 15px;
+	margin-top: 0px;
+	margin-bottom: 5px;
+	color: #BCB0B0;
+}
+
+.item .description{
+	font-family: "Open Sans", sans-serif;
+	font-style: normal;
+	font-weight: 600;
+	font-size: 14px;
+	line-height: 19px;
+	margin-left: 15px;
+	margin-right: 15px;
+	margin-top: 0px;
+	margin-bottom: 15px;
+}
+
+/* Button */
+
+.select {
+	display: none;
+	height: 35px;
+	width: 195px;
+	margin-top: auto;
+	margin-left: 15px;
+	margin-bottom: 15px;
+	background: #FCFFFF;
+	border: 1px solid #0D3F94;
+	box-sizing: border-box;
+	text-align: center;
+	justify-content: center;
+	align-items: center;
+}
+
+.select:hover {
+	background: #0D3F94;
+}
+
+.select p {
+	font-family: "Open Sans", sans-serif;
+	font-style: normal;
+	font-weight: 600;
+	font-size: 14px;
+	line-height: 19px;
+
+	color: #0D3F94;
+}
+
+.select:hover p {
+	color: #FCFFFF;
+}
+
+/* Pop-Up */
+
+.b-popup{
+    width:100%;
+    min-height:100%;
+    background-color: rgba(0,0,0,0.5);
+    overflow:hidden;
+    position:fixed;
+    top:0px;
+}
+
+.b-popup .b-popup-content{
+    margin: 40px auto auto auto;
+    width: 1220px;
+    height: 450px;
+    display: flex;
+    justify-content: end;
+    background: url("popup.png");
+}
+
+.b-popup .b-popup-content a {
+	margin-top: 10px;
+	margin-right: 10px;
+	text-decoration: none;
+	color: black;
+}
