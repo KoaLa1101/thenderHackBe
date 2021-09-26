@@ -19,27 +19,30 @@ public class ContractsServiceImpl {
     private @Autowired
     ObjectMapper objectMapper;
 
-    //Todo вернуть топ 3 популярных товара (id CTE) (+ названия cte) +(наименование поставщика) про поставщика хз, что если у одного товара разные поставщики,
-    //каждому коду топ 3 популярных товара по сути отсортировать лист лонгов
+
+
     public Map<String,List<ResultDTO>> getMostPopularItemsMap(Map<String, List<CTETableDTO>> cteIDByKPGZCodeMap){
-        //строка - код, лист - cteID
         Map<String,List<ResultDTO>> resultDTOMap = new HashMap<>();
+        log.info("started finding");
 
         cteIDByKPGZCodeMap.forEach((gpkzCode, idCTEInCTETable) -> {
             List<ResultDTO> resultDTOList = new ArrayList<>();
 
             idCTEInCTETable.stream().forEach(CTETableDto -> {
-                List<Contracts> contractsDtoList = contractsRepository.findByCteId(CTETableDto.getCteId().toString());
+                List<Contracts> contractsDtoList = contractsRepository.findByCteId(CTETableDto.getCte_id());
                 LongSummaryStatistics longSummaryStatistics = contractsDtoList
                         .stream()
                         .filter(contracts ->Objects.nonNull(contracts) && Objects.nonNull(contracts.getCte()))
                         .map(contracts -> Math.round(contracts.getCte().getQuantity()))
-                        .flatMapToLong(LongStream::of).summaryStatistics();  //Посчитали статистику (в ней есть сумма)
-                resultDTOList.add(ResultDTO.builder().CTEName(CTETableDto.getCteName()).summ(longSummaryStatistics.getSum()).id(CTETableDto.getCteId()).build());
+                        .flatMapToLong(LongStream::of).summaryStatistics();
+                resultDTOList.add(ResultDTO.builder().CTEName(CTETableDto.getCte_name()).summ(longSummaryStatistics.getSum()).id(CTETableDto.getCte_id()).build());
 
             });
-            resultDTOList.sort(Comparator.comparingLong(ResultDTO::getSumm));
-            resultDTOMap.put(gpkzCode,resultDTOList);
+            List<ResultDTO> finalResultDTOList=resultDTOList.subList(0,3);
+
+            finalResultDTOList.sort(Comparator.comparingLong(ResultDTO::getSumm));
+            log.info(finalResultDTOList.toString());
+            resultDTOMap.put(gpkzCode,finalResultDTOList);
 
         });
 

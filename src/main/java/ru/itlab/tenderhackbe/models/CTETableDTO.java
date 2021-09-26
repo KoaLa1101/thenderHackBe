@@ -11,6 +11,9 @@ import lombok.NoArgsConstructor;
 @Builder
 public class CTETableDTO
 {
-    private String cteId;
-    private String cteName;
+    private String cte_id;
+    private String cte_name;
+    public static CTETableDTO from(Cte cte){
+        return CTETableDTO.builder().cte_id(cte.getCteId().toString()).cte_name(cte.getCteName()).build();
+    }
 }

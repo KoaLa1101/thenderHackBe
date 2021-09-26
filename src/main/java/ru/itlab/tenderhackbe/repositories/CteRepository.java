@@ -12,6 +12,7 @@ import java.util.List;
 
 @Repository
 public interface CteRepository extends JpaRepository<Cte,Long> {
-    @Query(nativeQuery = true, value = "select cte_id,cte_name from cte where kpgz_code=:param1")
-    List<CTETableDTO> getAllIdByKpgz(@Param("param1")String code);
+
+    @Query(nativeQuery = true, value = "select * from cte where kpgz_code=:param1")
+    List<Cte> getAllIdByKpgz(@Param("param1")String code);
 }

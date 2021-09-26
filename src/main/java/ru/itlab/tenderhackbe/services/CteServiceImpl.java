@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.itlab.tenderhackbe.models.CTETableDTO;
+import ru.itlab.tenderhackbe.models.ResultDTO;
 import ru.itlab.tenderhackbe.repositories.CteRepository;
 
 import java.io.*;
@@ -17,19 +18,23 @@ public class CteServiceImpl {
 
     @Autowired
     private CteRepository cteRepository;
+    @Autowired
+    private ContractsServiceImpl contractsService;
 
-    public Map<String, List<String>> getCteId(String inn) {
+    public Map<String, List<ResultDTO>> getCteId(String inn) {
         List<String> codes = getCodes(inn);
-        Map<String, List<String>> result = new HashMap<>();
+        Map<String, List<CTETableDTO>> result = new HashMap<>();
         List<CTETableDTO> cteTableDTOList = new ArrayList<>();
         for (String code : codes) {
-            cteTableDTOList = cteRepository.getAllIdByKpgz(code);
-            result.put(code, cteTableDTOList.stream().map(x->x.getCteId()).collect(Collectors.toList()));
+            cteTableDTOList = cteRepository.getAllIdByKpgz(code).stream().map(CTETableDTO::from).collect(Collectors.toList());
+            result.put(code, cteTableDTOList);
         }
-        return result;
+        log.info("result {}",result);
+        log.info("log from getCteId");
+        return contractsService.getMostPopularItemsMap(result);
     }
 
-    public List<String> getCodes(String inn) {
+    private List<String> getCodes(String inn) {
         List<String> codes = new ArrayList<>();
         List<List<String>> allUsers = readCsv();
 

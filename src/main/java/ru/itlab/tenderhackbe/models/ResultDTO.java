@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 @Builder
 public class ResultDTO {
     private Long summ;
-    private Long id;
+    private String id;
     private String CTEName;
 }

@@ -28,18 +28,23 @@ public class TestController {
 
     @GetMapping("/getTest")
     public void getTest(){
-        Map<String, List<CTETableDTO>> testMap = new HashMap<>();
+  /*      Map<String, List<CTETableDTO>> testMap = new HashMap<>();
         testMap.put("01.20.07.11.03.01.02",
                 Arrays.asList(CTETableDTO.builder()
-                        .cteName("Мешки для мусора 60 л, черные, в рулоне 20 шт., ПНД, 10 мкм, 60х72 см, стандарт, КОНЦЕПЦИЯ БЫТА")
-                        .cteId(1207503L)
+                        .cte_name("Мешки для мусора 60 л, черные, в рулоне 20 шт., ПНД, 10 мкм, 60х72 см, стандарт, КОНЦЕПЦИЯ БЫТА")
+                        .cteId("1207503")
                         .build(),
                         CTETableDTO
                                 .builder()
-                                .cteName("Мешки для мусора, 120 л, черные, в рулоне 10 шт., ПНД, 15 мкм, 70х110 см, стандарт, КОНЦЕПЦИЯ БЫТА")
-                                .cteId(1207504L)
+                                .cte_name("Мешки для мусора, 120 л, черные, в рулоне 10 шт., ПНД, 15 мкм, 70х110 см, стандарт, КОНЦЕПЦИЯ БЫТА")
+                                .cteId("1207504")
                                 .build()));
-      log.info(  contractsService.getMostPopularItemsMap(testMap).toString());
+      log.info(  contractsService.getMostPopularItemsMap(testMap).toString());*/
+    }
+    @GetMapping("/getInfo")
+    public void getTestInfo(){
+        log.info( cteService.getCteId("7709043455").toString());
+
     }
 
     @RequestMapping("/gg")
