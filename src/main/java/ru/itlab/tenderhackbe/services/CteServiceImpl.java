@@ -48,7 +48,7 @@ public class CteServiceImpl {
     private List<List<String>> readCsv() {
 
         List<List<String>> records = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader("result_map.csv"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("result_map_names_price.csv"))) {
             String line;
             while ((line = br.readLine()) != null) {
                 line = line.trim();

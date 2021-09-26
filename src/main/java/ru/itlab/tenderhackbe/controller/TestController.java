@@ -4,8 +4,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.itlab.tenderhackbe.models.CTETableDTO;
-import ru.itlab.tenderhackbe.services.ContractsServiceImpl;
 import ru.itlab.tenderhackbe.services.CteServiceImpl;
+import ru.itlab.tenderhackbe.services.SellerServiceImpl;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ import java.util.List;
 public class TestController {
 
     @Autowired
-    ContractsServiceImpl contractsService;
+    SellerServiceImpl sellerService;
 
     @Autowired
     CteServiceImpl cteService;
@@ -22,6 +22,7 @@ public class TestController {
     @GetMapping("/gg/{inn}")
     @CrossOrigin(origins = "http://localhost:63342")
     public List<CTETableDTO> getTesting(@PathVariable String inn) {
+        //sellerService.sendNotification();   Вызвать отсылку потчы
         return cteService.getCteId(inn);
     }
 }
