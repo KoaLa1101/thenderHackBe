@@ -9,5 +9,5 @@ import java.util.List;
 
 @Repository
 public interface CteRepository extends JpaRepository<Cte,Long> {
-    List<CTETableDTO> getAllByKpgzCode(String code);
+    List<Long> getAllByKpgzCode(String code);
 }
