@@ -9,6 +9,7 @@ import ru.itlab.tenderhackbe.models.*;
 import ru.itlab.tenderhackbe.repositories.ContractsRepository;
 
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.LongStream;
 
 @Slf4j
@@ -24,16 +25,23 @@ public class ContractsServiceImpl {
     public Map<String,List<ResultDTO>> getMostPopularItemsMap(Map<String, List<CTETableDTO>> cteIDByKPGZCodeMap){
         Map<String,List<ResultDTO>> resultDTOMap = new HashMap<>();
         log.info("started finding");
+        for (String i :cteIDByKPGZCodeMap.keySet()) {
+            List<ResultDTO> resultDTOList = new ArrayList<>();
+            for(CTETableDTO cteTableDTO: cteIDByKPGZCodeMap.get(i)){
+             List<ContractsDto>
 
+
+            }
+        }
         cteIDByKPGZCodeMap.forEach((gpkzCode, idCTEInCTETable) -> {
             List<ResultDTO> resultDTOList = new ArrayList<>();
 
             idCTEInCTETable.stream().forEach(CTETableDto -> {
-                List<Contracts> contractsDtoList = contractsRepository.findByCteId(CTETableDto.getCte_id());
+                List<ContractsDto> contractsDtoList = contractsRepository.findByCteId(CTETableDto.getCte_id()).stream().map(contracts -> ContractsDto.from(contracts)).collect(Collectors.toList());
                 LongSummaryStatistics longSummaryStatistics = contractsDtoList
                         .stream()
-                        .filter(contracts ->Objects.nonNull(contracts) && Objects.nonNull(contracts.getCte()))
-                        .map(contracts -> Math.round(contracts.getCte().getQuantity()))
+                        .filter(contracts ->Objects.nonNull(contracts) && Objects.nonNull(contracts.getQuantity()))
+                        .map(ContractsDto::getQuantity)
                         .flatMapToLong(LongStream::of).summaryStatistics();
                 resultDTOList.add(ResultDTO.builder().CTEName(CTETableDto.getCte_name()).summ(longSummaryStatistics.getSum()).id(CTETableDto.getCte_id()).build());
 
