@@ -21,17 +21,13 @@ public class CteServiceImpl {
     @Autowired
     private ContractsServiceImpl contractsService;
 
-    public Map<String, List<ResultDTO>> getCteId(String inn) {
+    public List<CTETableDTO> getCteId(String inn) {
         List<String> codes = getCodes(inn);
-        Map<String, List<CTETableDTO>> result = new HashMap<>();
-        List<CTETableDTO> cteTableDTOList = new ArrayList<>();
-        for (String code : codes) {
-            cteTableDTOList = cteRepository.getAllIdByKpgz(code).stream().map(CTETableDTO::from).collect(Collectors.toList());
-            result.put(code, cteTableDTOList);
+        List<CTETableDTO> result = new ArrayList<>();
+        for (String i:codes){
+            result.add(CTETableDTO.builder().cte_id(i).cte_name(cteRepository.getById(Long.parseLong(i)).getCteName()).build());
         }
-        log.info("result {}",result);
-        log.info("log from getCteId");
-        return contractsService.getMostPopularItemsMap(result);
+        return result;
     }
 
     private List<String> getCodes(String inn) {
@@ -44,7 +40,7 @@ public class CteServiceImpl {
                     codes = list;
             }
         }
-        return get3Cats(codes);
+        return get5Cats(codes);
     }
 
 
@@ -64,11 +60,13 @@ public class CteServiceImpl {
         return records;
     }
 
-    private List<String> get3Cats(List<String> list){
+    private List<String> get5Cats(List<String> list){
         List<String> topCat = new ArrayList<>();
-        topCat.add(list.get(2).substring(3, list.get(2).length()-1));
+        topCat.add(list.get(1).substring(3, list.get(1).length()-1));
+        topCat.add(list.get(2).substring(2, list.get(2).length()-1));
         topCat.add(list.get(3).substring(2, list.get(3).length()-1));
         topCat.add(list.get(4).substring(2, list.get(4).length()-1));
+        topCat.add(list.get(5).substring(2, list.get(5).length()-1));
         return topCat;
     }
 
