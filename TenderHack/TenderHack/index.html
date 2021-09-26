@@ -31,7 +31,7 @@
     $("#getRecBtn").click(function () {
         $("#getRecBtn").prop('disabled', true);
         $.ajax({
-            url: "localhost:8080/gg",
+            url: "localhost:8080/gg?inn="+$("#innField").val(),
             method: 'GET',
             cache: false,
             type: "text/json",
