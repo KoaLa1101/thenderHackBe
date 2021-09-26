@@ -29,20 +29,24 @@
 <script type="text/javascript" src="index.js"></script>
 <script>
     $("#getRecBtn").click(function () {
+        console.log("localhost:8080/gg/"+$("#innField").val());
         $("#getRecBtn").prop('disabled', true);
         $.ajax({
-            url: "localhost:8080/gg/{"+$("#innField").val()+"}",
+            url: "http://localhost:8080/gg/"+$("#innField").val(),
             method: 'GET',
             cache: false,
             type: "text/json",
 
             success: function (res) {
                 console.log(res);
-                let jsonData = JSON.parse(res);
-                for (let i = 0; i < jsonData.array.length; i++) {
-                    let elem = jsonData.array[i];
-                    addItem(elem);
-                    console.log(elem);
+
+                for (let i = 0; i < res.length; i++) {
+                    console.log(res[i]['cte_name'])
+                    if(i < 4) {
+                        addItem(res[i]['cte_name'], true);
+                    } else {
+                        addItem(res[i]['cte_name'], false);
+                    }
                 }
                 $("#getRecBtn").prop('disabled', false);
             },

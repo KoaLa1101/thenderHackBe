@@ -46,5 +46,5 @@ function addItem(str, value) {
     }
 
     element.innerHTML
-        += '<div class="item" itemid="' + json.id + '"><img src="image.png"><p class="price">' + (Math.random() * 10000).toString().substring(0, 6) + ' ₽</p><p class="availability">' + Math.floor(Math.random() * 100) + ' предложения</p><p class="description">' + json['name'].substring(0, 42) + "..." + '</p><button class="select" onclick="javascript:popUpShow()"><p>Выбрать</p></button></div>';
+        += '<div class="item" itemid="' + json.id + '"><img src="image.png"><p class="price">' + (Math.random() * 10000).toString().substring(0, 6) + ' ₽</p><p class="availability">' + Math.floor(Math.random() * 100) + ' предложения</p><p class="description">' + str.substring(0, 42) + "..." + '</p><button class="select" onclick="javascript:popUpShow()"><p>Выбрать</p></button></div>';
 }
