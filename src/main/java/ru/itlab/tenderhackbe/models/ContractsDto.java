@@ -1,15 +1,6 @@
 package ru.itlab.tenderhackbe.models;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.vladmihalcea.hibernate.type.json.JsonType;
 import lombok.*;
-import org.hibernate.Hibernate;
-import org.hibernate.annotations.Subselect;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import java.util.Objects;
 
 @Getter
 @ToString
@@ -19,10 +10,15 @@ import java.util.Objects;
 public class ContractsDto {
 
     private String id;
-    private String Quantity;
+    private Long Quantity;
 
-    private String sellerName;
-
+    public static ContractsDto from(Contracts contracts) {
+        if(contracts==null){
+            return null;
+        }
+        return ContractsDto.builder()
+                .id(contracts.getCte().getId().toString()).Quantity(Math.round(contracts.getCte().getQuantity())).build();
+    }
 
 
 }
