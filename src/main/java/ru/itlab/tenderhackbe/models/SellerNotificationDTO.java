@@ -9,10 +9,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class SellerNotificationDto {
+public class SellerNotificationDTO {
 
     private String sellerInn;
-    private String sellerKpp;
     private String sellerName;
     private String cteId;
     private String cteName;

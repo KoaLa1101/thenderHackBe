@@ -3,14 +3,14 @@ package ru.itlab.tenderhackbe.util;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.tomcat.util.http.fileupload.util.mime.MimeUtility;
+import javax.mail.internet.MimeUtility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
 
 import java.util.concurrent.ExecutorService;
-import javax.mail.internet.MimeUtility;
+
 
 @Component
 @Slf4j
@@ -19,6 +19,7 @@ public class EmailUtilImpl implements EmailUtil {
   @Autowired @Setter @Getter private JavaMailSender javaMailSender;
 
   @Autowired private ExecutorService executorService;
+
 
   @Override
   public void sendEmail(String to, String subject, String from, String text) {
