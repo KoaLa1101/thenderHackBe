@@ -22,6 +22,6 @@ public class TestController {
     @GetMapping("/gg/{inn}")
     @CrossOrigin(origins = "http://localhost:63342")
     public List<CTETableDTO> getTesting(@PathVariable String inn) {
-        return cteService.getCteId("7727031452");
+        return cteService.getCteId(inn);
     }
 }
