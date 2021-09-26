@@ -4,12 +4,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.itlab.tenderhackbe.models.CTETableDTO;
-import ru.itlab.tenderhackbe.models.ResultDTO;
 import ru.itlab.tenderhackbe.repositories.CteRepository;
 
-import java.io.*;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -18,15 +20,11 @@ public class CteServiceImpl {
 
     @Autowired
     private CteRepository cteRepository;
-    @Autowired
-    private ContractsServiceImpl contractsService;
 
     public List<CTETableDTO> getCteId(String inn) {
         List<String> codes = getCodes(inn);
         List<CTETableDTO> result = new ArrayList<>();
         for (String i:codes){
-            log.info(i);
-            log.info(String.valueOf(Long.parseLong(i)));
             result.add(CTETableDTO.builder().cte_id(i).cte_name(cteRepository.getById(Long.parseLong(i)).getCteName()).build());
         }
         return result;
@@ -63,14 +61,12 @@ public class CteServiceImpl {
     }
 
     private List<String> get5Cats(List<String> list){
-        log.info(list.toString());
         List<String> topCat = new ArrayList<>();
-        topCat.add(list.get(1).substring(2, list.get(1).length()));
-        topCat.add(list.get(2).substring(1, list.get(2).length()));
-        topCat.add(list.get(3).substring(1, list.get(3).length()));
-        topCat.add(list.get(4).substring(1, list.get(4).length()));
+        topCat.add(list.get(1).substring(2));
+        topCat.add(list.get(2).substring(1));
+        topCat.add(list.get(3).substring(1));
+        topCat.add(list.get(4).substring(1));
         topCat.add(list.get(5).substring(1, list.get(5).length()-2));
-        log.info(topCat.toString());
         return topCat;
     }
 
