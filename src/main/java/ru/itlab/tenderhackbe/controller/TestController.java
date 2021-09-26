@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.itlab.tenderhackbe.models.CTETableDTO;
 import ru.itlab.tenderhackbe.services.ContractsServiceImpl;
+import ru.itlab.tenderhackbe.services.CteServiceImpl;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -22,6 +23,9 @@ public class TestController {
     @Autowired
     ContractsServiceImpl contractsService;
 
+    @Autowired
+    CteServiceImpl cteService;
+
     @GetMapping("/getTest")
     public void getTest(){
         Map<String, List<CTETableDTO>> testMap = new HashMap<>();
@@ -36,5 +40,10 @@ public class TestController {
                                 .cteId(1207504L)
                                 .build()));
       log.info(  contractsService.getMostPopularItemsMap(testMap).toString());
+    }
+
+    @RequestMapping("/gg")
+    public void getTesting(){
+        log.info(cteService.getCteId("7709043455").toString());
     }
 }
